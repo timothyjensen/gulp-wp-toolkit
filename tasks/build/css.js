@@ -15,6 +15,7 @@ const gulp       = require( 'gulp' ),
       banner     = require( 'postcss-banner' ),
       notify     = require( 'gulp-notify' ),
       map        = require( 'lodash.map' ),
+      log        = require( 'node-pretty-log' ),
       rename     = require( 'gulp-rename' ),
       fs         = require( 'fs' );
 
@@ -102,7 +103,7 @@ module.exports = function() {
 	return map(config.css.scss, function(outputConfig, outputFilename) {
 
         if (!fs.existsSync(outputConfig.src)) {
-            return console.log('ERROR >> Source file ' + outputConfig.src + ' was not found.');
+            return log('error', 'Source file ' + outputConfig.src + ' was not found.');
         }
 
         return gulp
@@ -118,6 +119,6 @@ module.exports = function() {
         .pipe(postcss(getPostProcessors(outputConfig, outputFilename)))
         .pipe(sourcemap.write('./'))
         .pipe(gulp.dest(outputConfig.dest))
-        .pipe(notify({message: config.messages.css}));
+        .pipe(log('success', config.messages.css));
     });
 };
