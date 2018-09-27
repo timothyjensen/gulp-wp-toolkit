@@ -46,14 +46,7 @@ module.exports = {
     cssnano: {},
     remreplace: false,
     remmediaquery: true,
-    scss: {
-      style: {
-        src: 'develop/scss/style.scss',
-        dest: './',
-        outputStyle: 'compressed',
-        sourceMap: true,
-      },
-    },
+    scss: {},
   },
   js: {},
   theme: {},
