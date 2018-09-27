@@ -88,8 +88,9 @@ module.exports = function() {
       postProcessors.push(cssnano(config.css.cssnano));
     }
 
-    // If we're working on the main style.css, output the theme header.
-    if ('style' === outputFilename) {
+    // Output the theme header on the main style.css. Can be disabled by
+    // setting themeHeader: false in the config. Useful for plugins.
+    if ('style' === outputFilename && false !== outputConfig.themeHeader) {
       themeHeader = buildThemeHeader();
       postProcessors.push(
         banner(
